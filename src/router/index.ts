@@ -10,10 +10,16 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const appData = await testApi.getAppData();
-  const asistData = await testApi.getAssistData();
+  const assistData = await testApi.getAssistData();
 
-  app.config.globalProperties.appData = Object.freeze(appData);
-  app.config.globalProperties.assistData = Object.freeze(asistData);
+  // app.config.globalProperties.appData = Object.freeze(appData);
+  // app.config.globalProperties.assistData = Object.freeze(asistData);
+
+  app.config.globalProperties = Object.freeze({
+    ...app.config.globalProperties,
+    appData,
+    assistData,
+  });
 
   next();
 });

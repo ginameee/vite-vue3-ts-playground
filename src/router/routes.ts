@@ -3,12 +3,17 @@ import First from "../components/pages/First.vue";
 import Second from "../components/pages/Second.vue";
 import * as testApi from "../apis/test";
 import { RouteRecordRaw } from "vue-router";
-import app from "../main";
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
     component: Home,
+    beforeEnter: async (to, from, next) => {
+      const initialData = await testApi.getInitialData("Home Page");
+      to.params.initialData = initialData;
+      next();
+    },
+    props: true,
   },
   {
     path: "/first",
@@ -23,6 +28,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/second",
     component: Second,
+    beforeEnter: async (to, from, next) => {
+      const initialData = await testApi.getInitialData("Second Page");
+      to.params.initialData = initialData;
+      next();
+    },
+    props: true,
   },
 ];
 

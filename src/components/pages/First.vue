@@ -2,16 +2,15 @@
   <h1>First Page</h1>
 </template>
 <script setup lang="ts">
-import { getCurrentInstance } from "@vue/runtime-core";
+import useAppData from "../../hooks/useAppData";
 
-const instance = getCurrentInstance();
+const { asistData, appData } = useAppData();
+
 const props = defineProps({
   initialData: Object,
 });
 
-console.log(
-  "First Page: globalProperties",
-  instance?.appContext.config.globalProperties
-);
-console.log("First Page: props", props.initialData);
+console.log("First Page: appData", appData);
+console.log("First Page: assistData", asistData);
+console.log("First Page: initialData", props.initialData);
 </script>
